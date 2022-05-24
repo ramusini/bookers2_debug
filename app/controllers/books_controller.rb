@@ -18,11 +18,11 @@ class BooksController < ApplicationController
       redirect_to book_path(@new_book.id), notice: "You have created book successfully."
     else
       @books = Book.all
-      render 'index'
+      render :index
     end
   end
 
-  def edit
+  def editcd
     @book = Book.find(params[:id])
   end
 
@@ -35,9 +35,9 @@ class BooksController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @book = Book.find(params[:id])
-    @book.destoy
+    @book.destroy
     redirect_to books_path
   end
 
