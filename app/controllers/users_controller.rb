@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
-  #before_action :ensure_correct_user, only: [:update ]
+  before_action :ensure_correct_user, only: [:update, :edit ]
+  #:ensure_correct_userの内容は最下記に設定。only以下はどのアクションの時発動するか。
 
   def show
     @user = User.find(params[:id])
     @books = @user.books
-    @book = Book.new
+    @new_book = Book.new
   end
 
   def index
@@ -13,13 +14,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
   end
 
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to users_path(@user.id), notice: "You have updated user successfully."
+      redirect_to user_path(@user.id), notice: "You have updated user successfully."
     else
       render :edit
     end
