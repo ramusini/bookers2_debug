@@ -1,4 +1,5 @@
 class Book < ApplicationRecord
+  has_many :favorites, dependent: :destroy
   belongs_to :user, optional: true
 
   validates :title, presence:true
