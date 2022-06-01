@@ -21,17 +21,17 @@
         <td>
           <% if book.favorited?(current_user) %>
             <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
-            <!-- link_to book_favorite_path(book), method: :delete do -->
-              <span style="color:red;"><i class="fas fa-heart"></i>︎1</span>
-            <!-- end -->
+            <%= link_to book_favorites_path(book), method: :delete do %>
+              <span style="color:red;"><i class="fas fa-heart"></i><%= book.favorites.count %></span>
+            <% end %>
           <% else %>
             <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
-            <!-- link_to book_favorites_path(book), method: :post do -->
-              <span style="color:#1E90FF;"><i class="fas fa-heart"></i>︎0</span>
-            <!-- end -->
+            <%= link_to book_favorites_path(book), method: :post do %>
+              <span style="color:#1E90FF;"><i class="fas fa-heart"></i><%= book.favorites.count %></span>
+            <% end %>
           <% end %>
         </td>
-        <td>コメント数:0</td>
+        <td>コメント数:<%= book.book_comments.count %></td>
       </tr>
     <% end %>
   </tbody>

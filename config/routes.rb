@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index,:show,:edit,:update]
   #「Userがいいねしたのは、どの投稿なのか」を分かるようにするためネスト
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
-    resources :favorites, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
+    resources :book_comments, only: [:create, :destroy]
   end
 
   root :to =>"homes#top"
