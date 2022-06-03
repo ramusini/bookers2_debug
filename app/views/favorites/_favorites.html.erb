@@ -1,0 +1,11 @@
+<% if book.favorited?(current_user) %>
+  <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+  <%= link_to book_favorites_path(book), method: :delete, remote: true do %>
+    <span style="color:red;"><i class="fas fa-heart"></i><%= book.favorites.count %></span>
+  <% end %>
+<% else %>
+  <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+  <%= link_to book_favorites_path(book), method: :post, remote: true do %>
+    <span style="color:#1E90FF;"><i class="fas fa-heart"></i><%= book.favorites.count %></span>
+  <% end %>
+<% end %>
