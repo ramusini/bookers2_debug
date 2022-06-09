@@ -6,11 +6,13 @@ class BooksController < ApplicationController
     @user = User.find(@book.user_id)
     @new_book = Book.new
     @new_book_comment = BookComment.new
+    ##閲覧数カウント機能用/詳細ページを開くたびにカウント
+    impressionist(@book, nil, unique: [:ip_address]) 
   end
 
   def index
-    @books = Book.includes(:favorited_users).sort{|a,b| b.favorited_users.size <=> a.favorited_users.size}
     @new_book = Book.new
+    @books = Book.includes(:favorited_users).sort{|a,b| b.favorited_users.size <=> a.favorited_users.size}
   end
 
   def create

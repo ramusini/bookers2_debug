@@ -7,7 +7,10 @@ class Book < ApplicationRecord
   has_many :book_comments, dependent: :destroy
   
   belongs_to :user, optional: true
-
+  
+  #閲覧数カウント機能用
+  is_impressionable counter_cache: true
+  
   validates :title, presence:true
   validates :body, presence:true, length:{maximum:200}
   
