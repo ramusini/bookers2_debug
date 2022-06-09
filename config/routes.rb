@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'chat/:id', to: 'chats#show', as: 'chat'
+  resources :chats, only: [:create]
   devise_for :users
   #フォロー機能をネスト
   resources :users, only: [:index,:show,:edit,:update] do

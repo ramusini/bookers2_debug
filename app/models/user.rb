@@ -13,6 +13,10 @@ class User < ApplicationRecord
   # そのユーザがフォローしている人orフォローされている人の一覧を出したい
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :followed_relationships, source: :follower
+  #1対1チャット機能
+  has_many :user_rooms, dependent: :destroy
+  has_many :chats, dependent: :destroy
+  
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
