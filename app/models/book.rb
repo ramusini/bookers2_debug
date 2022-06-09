@@ -5,23 +5,23 @@ class Book < ApplicationRecord
   has_many :favorited_users, through: :favorites, source: :user
   #コメント用アソシエーション
   has_many :book_comments, dependent: :destroy
-  #閲覧数カウント
+  #閲覧数カウント機能
   has_many :view_counts, dependent: :destroy
-  
+
   belongs_to :user, optional: true
-  
+
   #閲覧数カウント機能用
   is_impressionable counter_cache: true
-  
+
   validates :title, presence:true
   validates :body, presence:true, length:{maximum:200}
-  
+
   #一致するレコードが存在しない＝「まだいいねしていない→createアクションへ」
   #一致するレコードが存在する　＝「すでにいいね済み→destroyアクションへ」
   def favorited?(user)
    favorites.where(user_id: user.id).exists?
   end
-  
+
   # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
