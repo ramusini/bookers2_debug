@@ -1,6 +1,11 @@
 class Book < ApplicationRecord
+  #いいね用アソシエーション
   has_many :favorites, dependent: :destroy
+  #いいね数並べ替えアソシエーション
+  has_many :favorited_users, through: :favorites, source: :user
+  #コメント用アソシエーション
   has_many :book_comments, dependent: :destroy
+  
   belongs_to :user, optional: true
 
   validates :title, presence:true
