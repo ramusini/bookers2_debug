@@ -6,8 +6,16 @@ class BooksController < ApplicationController
     @user = User.find(@book.user_id)
     @new_book = Book.new
     @new_book_comment = BookComment.new
-    ##閲覧数カウント機能用/詳細ページを開くたびにカウント
+    
+    ##閲覧数カウント機能用/詳細ページを開くたびにカウント加算(inpressionistの場合)
     impressionist(@book, nil, unique: [:ip_address]) 
+    
+    #閲覧数カウント機能/inpressionistを利用しない場合。
+    @book_detail = Book.find(params[:id])
+    unless ViewCount.find_by(user_id: current_user.id, book_id: @book_detail.id)
+      current_user.view_counts.create(book_id: @book_detail.id)
+    end
+    
   end
 
   def index

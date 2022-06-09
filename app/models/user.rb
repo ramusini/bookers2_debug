@@ -16,6 +16,8 @@ class User < ApplicationRecord
   #1対1チャット機能
   has_many :user_rooms, dependent: :destroy
   has_many :chats, dependent: :destroy
+  #閲覧数カウント機能
+  has_many :view_counts, dependent: :destroy
   
   has_one_attached :profile_image
 

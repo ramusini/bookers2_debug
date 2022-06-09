@@ -5,6 +5,8 @@ class Book < ApplicationRecord
   has_many :favorited_users, through: :favorites, source: :user
   #コメント用アソシエーション
   has_many :book_comments, dependent: :destroy
+  #閲覧数カウント
+  has_many :view_counts, dependent: :destroy
   
   belongs_to :user, optional: true
   

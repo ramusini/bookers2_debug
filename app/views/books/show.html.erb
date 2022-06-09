@@ -28,7 +28,12 @@
             <%=render 'favorites/favorites', book: @book %>
           </td>
           <td>コメント数:<%= @book.book_comments.count %></td>
-          <td>閲覧数<%= @book.impressions_count %></td>
+          
+          <!--投稿詳細閲覧数カウント機能-->
+          <!--下記はinpressionist利用の場合-->
+          <!--<td>閲覧数:<%= @book.impressions_count %></td>-->
+          <td><p class="view-count">閲覧数:<%= @book_detail.view_counts.count %></p></td>
+          
         </tr>
       </table>
       <!--コメント一覧＆投稿機能-->
